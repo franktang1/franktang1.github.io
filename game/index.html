@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>专注力训练小工具</title>
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" href="css/mdui.min.css">
+		<script src="js/mdui.min.js"></script>
+	</head>
+
+	<body class="mdui-theme-primary-green">
+			<div class="mdui-toolbar mdui-color-theme mdui-appbar-fixed">
+				<span class="mdui-typo-title" style="color:white;">专注力训练</span>
+				<div class="mdui-toolbar-spacer"></div>
+				
+			</div>
+			<div class="mdui-container">
+				<div class="noExtension" id="noExtension">
+					提示: 请安装
+					<a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet">WebExtensionWallet</a> 再使用专注力训练小工具。
+				</div>
+
+				<div class="game-wrap" id="app" v-clock>
+					<div class="inp-wrap">
+						<div id="gamebar">
+							<div class="codeC"><img src="img/codeC.png"/></div>
+							<div class="codeC" style="transform: rotate(90deg)"><img src="img/codeC.png"/></div>
+							<div class="codeC" style="transform: rotate(180deg)"><img src="img/codeC.png"/></div>
+							<div class="codeC" style="transform: rotate(270deg)"><img src="img/codeC.png"/></div>
+							<div class="codeC"><img src="img/codeC.png"/></div>
+						</div>
+					</div>
+				</div>
+				<div id="gameovertip"></div>
+				<div id="rankListPanel">
+					<div id="tipArea">
+						<b>专注力训练说明：</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;请根据上面游戏栏中出现的图形，按如下键标识出“C”的开口方向，一共五组：<br/>　　A：左<br/>　　W：上<br/>　　S：下<br/>　　D：右<br/><br/><br/>
+						<button id="restart" onclick="startGame();$('#restart').attr('disabled',true);" class="mdui-btn mdui-btn-raised mdui-ripple">开始</button>
+						<button onclick="getList(1,10)" class="mdui-btn mdui-btn-raised mdui-ripple">我的排行</button><br/><br/><a href="javascript:void(0);" onclick="getList(0,100);">查看所有排行榜</a>
+					</div>
+					<div class="rank" id="rankListArea">
+						<div class="item"><b><span class="r">序号</span><span class="t">玩家</span><span class="s">得分</span></b></div>
+					<div>
+				</div>
+			</div>
+			<script src="js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+			<script src="js/nebPay.js" type="text/javascript" charset="utf-8"></script>
+			<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+			<script src="js/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+			<script>
+				var NebPay = require("nebpay"); //https://github.com/nebulasio/nebPay
+				var nebPay = new NebPay();
+
+				//检查扩展是否已安装
+				//如果安装了扩展，var“webExtensionWallet”将被注入到web页面中1
+				if(typeof(webExtensionWallet) === "undefined") {
+					//alert ("扩展钱包未安装，请先安装.")
+					$("#noExtension").show();
+				}
+			
+				var dappAddress = "n1eMcyH9WCAL2DC4BTo35oed4gWtcrwDoJG";
+				var player = '';
+				var score = 0;
+				var gamevalid = 0;
+				var gamecounting = 0;
+				var checknum = 0;
+				var gamesec = 0;
+
+				//获取排行榜
+				getList(1,10);
+
+				function getList(isMe,limit) {
+					var to = dappAddress;
+					var value = "0";
+					var callFunction = "getRinkingList";
+					var callArgs = "["+isMe+","+limit+"]"; //in the form of ["args"]
+					nebPay.simulateCall(to, value, callFunction, callArgs, { //使用nebpay的simulateCall接口去执行get查询, 模拟执行.不发送交易,不上链
+						listener: showRandList //指定回调函数
+					});
+				};
+
+				function showRandList(resp){
+					if(!resp.result) return;
+					var result = eval(JSON.parse(resp.result));
+
+					if(result.length==0){
+						$("#rankListArea").html("还没有玩家参与。");
+						$("#rankListPanel").show();
+						return;
+					}
+
+					var tmp = "<div class='item'><b><span class='r'>序号</span><span class='t'>玩家</span><span class='s'>得分</span></b></div>";
+					for(var i=0;i<result.length;i++){
+						var p = result[i].key.substr(0,result[i].key.indexOf("_"));
+						p=(result[i].isMe == "1")?"我":p;
+						tmp += "<div class='item'><b><span class='r'>"+(parseInt(result[i].index)+1)+"</span><span class='t'>"+p+"</span><span class='s'>"+result[i].value+"</span></b></div>";
+					}
+					$("#rankListArea").html(tmp);
+					$("#rankListPanel").show();
+				};
+
+				function push() {
+					var to = dappAddress;
+					var value = "0";
+					var callFunction = "set"
+					var callArgs = [];
+					player = $("#gameplayer").val();
+					//alert(player);
+					callArgs.push(player);
+					callArgs.push(score);
+					nebPay.call(to, value, callFunction, JSON.stringify(callArgs), { //使用nebpay的call接口去调用合约,
+						listener: function(resp){layer.alert("提交成功");getList(1,10);}
+					});
+				};
+				
+				function showGamebar(){
+					var num = parseInt($("#gamebar").width()/148);
+					var tmp = "";
+					var config = [{keycode:100,deg:0},{keycode:115,deg:90},{keycode:119,deg:-90},{keycode:97,deg:180}]
+					//<div class="codeC" style="transform: rotate(90deg)"><img src="img/codeC.png"/></div>
+					for (var i=0;i<num ;i++ ){
+						var _c = parseInt(Math.random()*10/3);
+						tmp += "<div class='codeC' keycode='"+config[_c].keycode+"' style='transform: rotate("+config[_c].deg+"deg)'><img src='img/codeC.png'/></div>";
+					}
+					$("#gamebar").html(tmp);
+				}
+
+				function startGame(){
+					score=0;
+
+					$("#gamebar").html("Reday:");
+					$("gameovertip").html("");
+					var counting = 0;
+					var starting = setInterval(function(){
+						counting += 1;
+						var _t = $("#gamebar").html(); 					
+						$("#gamebar").html(_t+counting+".");
+						if(counting > 2){
+							$("#gamebar").html(_t+counting+"......GO!");
+							clearInterval(starting);
+							starting = null;
+							startGame1();
+						}
+					},1000);
+				}
+				function startGame1(){
+					gamevalid = 0;
+					gamecounting += 1;
+					var tick = setInterval(function() {
+						showGamebar();
+						clearInterval(tick);
+						tick = null;
+						if(gamecounting<6) puseGame();
+						else gameOver();
+					}, 1000);
+				};
+				function puseGame(){
+					gamevalid = 1;
+					checknum = 0;
+					var tick = setInterval(function() {
+						$("#gamebar").html("Next.");
+						if(gamecounting==5)$("#gamebar").html("Over.");
+						clearInterval(tick);
+						tick = null;
+						startGame1();
+					}, 3*1000);
+				}
+				function gameOver(){
+					if(player=="")player="Sam";
+					$("#gameovertip").html("游戏结束，<input id='gameplayer' value='"+player+"' size='10' placeholder='亲，取个名字吧' type='text' max='20'/> 你本次的得分是："+score+"。");
+					$('#restart').attr('disabled',false);
+					push();
+				}
+				function checkScore(keycode){
+					if(gamevalid == 0) return;
+					if(keycode != 100 && keycode != 115 && keycode != 119 && keycode != 97)return;
+					var item = $("#gamebar div")[checknum];
+					
+					if(keycode == $(item).attr("keycode")){
+						$(item).html("<img src='img/codeG.png'/>");
+						score +=1;
+					}
+					else{
+						$(item).html("<img src='img/codeR.png'/>");
+					}
+					checknum += 1;
+
+				};
+
+				$(document).keypress(function(e){checkScore(e.keyCode);});
+			</script>
+		</body>
+
+</html>
