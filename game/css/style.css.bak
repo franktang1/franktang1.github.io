@@ -1,0 +1,150 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+
+.noExtension{
+	padding-top: 200px;
+    text-align: center;
+    font-size: 22px;
+    position: absolute;
+    width: 100%;
+    display: none;
+}
+game-wrap {
+	margin-top: 80px;
+}
+game-wrap .item{
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	min-height: 80px;
+	padding:10px;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+}
+game-wrap .item:first-child{
+	border-bottom: none;
+}
+game-wrap .item:nth-last-child(2){
+	border-top: none;
+}
+game-wrap .item .img{
+	height: 60px;
+	width:60px;
+	float: left;
+}
+game-wrap .item .img img{
+	width:100%;
+	border-radius: 50%;
+}
+
+game-wrap .item .user{
+	width: 100%;
+	float: left;
+	padding-left: 30px;
+}
+
+game-wrap .item .user .time{
+	font-size: 12px;
+	color: #aaa;
+	padding-left: 5px;
+}
+.content{
+	margin-top: 10px;
+}
+
+.info{
+	width:100%;
+	display: flex;
+	justify-content: space-between;
+	color: #999;
+}
+.tips{
+	padding-left:15px;
+	color:#999;
+	font-size:10px;
+}
+.reply{
+	color: #aaa;
+	cursor: pointer;
+	transition: color .3s;
+}
+
+.reply:hover{
+	color: #333;
+}
+
+.inp-wrap{
+	margin-top: 70px;
+	margin-bottom: 50px;
+	padding: 20px 0 20px 0;
+	width:100%;
+	height:148px;
+	background-color:#EFEcEF;
+}
+
+#gamebar{
+	width:100%;
+	height:148px;
+	display:flex;
+	overflow:hidden;
+	text-align:middle;
+}
+.codeC{
+	display:absolute;
+	margin-left:10px;
+	width:148px;
+	height:148px;
+}
+
+
+[v-cloak] {
+  display: none;
+}
+.link{
+	margin-top: 30px;
+	text-align: center;
+}
+.link a{
+	color: #000;
+}
+
+#tipArea{
+	width:500px;
+	float:left;
+	padding:5px;
+	line-height:20px;
+}
+#rankListArea{
+	width:300px;
+	float:left;
+}
+#rankListArea .item{
+	width:280px;
+	padding:5px;
+}
+#rankListArea .item .r{
+	width:40px;
+	height:20px;
+	text-align:center;
+	float:left;
+}
+#rankListArea .item .t{
+	width:150px;
+	height:20px;
+	text-align:left;
+	float:left;
+}
+#rankListArea .item .s{
+	width:80px;
+	height:20px;
+	text-align:center;
+	float:left;
+}
+
+#gameovertip{
+	height:60px;
+	text-align:center;
+}
