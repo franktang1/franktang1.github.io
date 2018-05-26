@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>生活中的小段子</title>
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" href="css/mdui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/htmleaf-demo.css">
+		<script src="js/mdui.min.js"></script>
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+	</head>
+
+		<body class="mdui-theme-primary-deep-purple mdui-theme-accent-purple" id="body">
+			<div class="mdui-toolbar mdui-color-theme mdui-appbar-fixed" style="z-index: 1000;">
+				<span class="mdui-typo-title" style="color: #FFF;">生活中的小段子</span>
+				<span style="padding-top: 6px;margin-left: 0;">奇趣汇聚各路生活段子，搞笑、脑洞、情感、神评等类型，今天，您笑了吗？</span>
+				<div class="mdui-toolbar-spacer"></div>
+				<a href="https://github.com/nebulasio" target="_blank" class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white" mdui-tooltip="{content: '查看 Github'}">
+					<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 36 36" enable-background="new 0 0 36 36" xml:space="preserve" class="mdui-icon" style="width: 24px;height:24px;">
+						<path fill-rule="evenodd" clip-rule="evenodd" fill="#ffffff" d="M18,1.4C9,1.4,1.7,8.7,1.7,17.7c0,7.2,4.7,13.3,11.1,15.5
+	c0.8,0.1,1.1-0.4,1.1-0.8c0-0.4,0-1.4,0-2.8c-4.5,1-5.5-2.2-5.5-2.2c-0.7-1.9-1.8-2.4-1.8-2.4c-1.5-1,0.1-1,0.1-1
+	c1.6,0.1,2.5,1.7,2.5,1.7c1.5,2.5,3.8,1.8,4.7,1.4c0.1-1.1,0.6-1.8,1-2.2c-3.6-0.4-7.4-1.8-7.4-8.1c0-1.8,0.6-3.2,1.7-4.4
+	c-0.2-0.4-0.7-2.1,0.2-4.3c0,0,1.4-0.4,4.5,1.7c1.3-0.4,2.7-0.5,4.1-0.5c1.4,0,2.8,0.2,4.1,0.5c3.1-2.1,4.5-1.7,4.5-1.7
+	c0.9,2.2,0.3,3.9,0.2,4.3c1,1.1,1.7,2.6,1.7,4.4c0,6.3-3.8,7.6-7.4,8c0.6,0.5,1.1,1.5,1.1,3c0,2.2,0,3.9,0,4.5
+	c0,0.4,0.3,0.9,1.1,0.8c6.5-2.2,11.1-8.3,11.1-15.5C34.3,8.7,27,1.4,18,1.4z"></path>
+					</svg>
+				</a>
+			</div>
+
+			<div class="mdui-container" style="min-height: 100%;margin-bottom: -110px;">
+				<div class="waterfall" style="margin-top: 60px;">
+				</div>
+
+				<div id="waterfall-template" style="display: none;">
+				</div>
+
+				<div id="image-template" style="display: none;">
+					<ul class="list-group">
+						<li class="list-group-item">
+							<a href="javascript:;">
+								<img src="img/1.jpg" style="height:300px;"/>
+								<span style="position: absolute;left: 10px;top:10px;color: #000;">{{content}}</span>
+							</a>
+						</li>
+						<li class="list-group-item" style="height: 60px;">
+							<div class="mdui-col-xs-10">
+								<span style="word-wrap : break-word;margin: 0;">{{author}}</span>
+							</div>
+							<div class="pull-right mdui-col-xs-2" onclick="good('{{good}}','{{id}}')"
+								 style="cursor:pointer;margin-top:10px;background: url('img/good1.png');background-size: 100% 100%;height: 20px;width: 22px;"></div>
+						</li>
+					</ul>
+				</div>
+
+				<div style="height: 110px;"></div>
+			</div>
+
+			<div style="width: 100%;height: 110px;position:relative">
+				<embed src="img/NebulasLogo.svg" type="image/svg+xml" style="width: 110px;height: 110px;position: absolute;left: 25%;"/>
+				<div style="text-align: center;">
+					<button class="mdui-fab mdui-color-theme-accent" mdui-tooltip="{content: '点击上传生活中的小段子', position: 'top'}" id="addButton">
+						<i class="mdui-icon material-icons">add</i>
+					</button>
+				</div>
+				<div id="noExtension" style="display: none;text-align: center;">
+					提示: 请安装
+					<a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet">WebExtensionWallet</a> 来使用生活中的小段子
+				</div>
+				<div style="margin: 5px 0;text-align: center;">
+					使用<a href="https://nebulas.io/">星云链</a>驱动，<a href="https://incentive.nebulas.io/cn/signup.html?invite=WsubW">提交DAPP获得100NAS</a>
+				</div>
+				<span style="width: 30%;height: 110px;position: absolute;right: 5%;bottom: 0;padding-top: 20px;">
+					本页面段子皆为用户发布，适用避风港原则。如有涉嫌侵权内容，请邮件联系franktang1@163.com，告知段子所属钱包地址(左下角的地址)以及侵权证据。
+				</span>
+			</div>
+
+			<div id="myModal" class="hide">
+				<div style="text-align: center; margin-top: 10px;">
+					<textarea id="content" cols="47" rows="10"></textarea>
+				</div>
+			</div>
+			<script src="js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+			<script src="js/nebPay.js" type="text/javascript" charset="utf-8"></script>
+			<script src="js/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+			<script src="js/bootstrap-waterfall.js"></script>
+			<script>
+				$("#body").css("height",(document.documentElement.clientHeight-60)+"px");
+
+
+				var NebPay = require("nebpay"); //https://github.com/nebulasio/nebPay
+				var nebPay = new NebPay();
+
+				//检查扩展是否已安装
+				//如果安装了扩展，var“webExtensionWallet”将被注入到web页面中1
+				if(typeof(webExtensionWallet) === "undefined") {
+					//alert ("扩展钱包未安装，请先安装.")
+					$("#noExtension").show();
+				}
+
+				var dappAddress = "n239mACGUH8UipabKsGZ2YKDJ5TLi6RFDBw";
+
+                getAll();
+                
+                function getAll() {
+                    var to = dappAddress;
+                    var value = "0";
+                    var callFunction = "getAll";
+                    var callArgs = "[]";
+                    nebPay.simulateCall(to, value, callFunction, callArgs, { //使用nebpay的simulateCall接口去执行get查询, 模拟执行.不发送交易,不上链
+                        listener: cbSearch //指定回调函数
+                    });
+                }
+
+                function cbSearch(resp) {
+                    if(!resp.result) return;
+                    var result = eval(JSON.parse(resp.result));
+                    if(result !== 'null') {
+                        $('#waterfall-template').empty();
+                        var imgs = ["123_01.jpg","123_03.jpg","123_04.jpg","123_06.jpg","123_08.jpg"
+                            ,"123_09.jpg","123_10.jpg","123_12.jpg"];
+						for(var i=0; i<result.length; i++){
+                            var random = parseInt(Math.random()*imgs.length);
+                            var height = getContentHeight(result[i].content);
+						    var html = $("#image-template").html();
+                            html = html.replace("{{id}}",result[i].id);
+                            html = html.replace("{{content}}",result[i].content);
+                            html = html.replace("{{author}}",result[i].author);
+                            html = html.replace("{{good}}",result[i].good);
+                            html = html.replace("img/1.jpg","img/" + imgs[random]);
+                            html = html.replace("height:300px;","height:"+height+"px;");
+                            if(result[i].good == "1"){
+                                html = html.replace("img/good1.png","img/good2.png");
+							}else{
+                                html = html.replace("img/good2.png","img/good1.png");
+							}
+                            $('#waterfall-template').append(html);
+						}
+                        $('.waterfall')
+                            .data('bootstrap-waterfall-template', $('#waterfall-template').html())
+                            .waterfall();
+                    }
+                }
+
+                function getContentHeight(content) {
+                    if(content.length < 60){
+                        return 100;
+					}else if(content.length >= 60 && content.length < 100){
+					    return 150;
+					}else if(content.length >= 100 && content.length < 200){
+                        return 250;
+					}else if(content.length >= 200 && content.length < 300){
+                        return 350;
+					}else if(content.length >= 300 && content.length < 400){
+                        return 450;
+                    }else{
+                        return 550;
+					}
+                }
+
+                $('#addButton').on('click', function() {
+                    layer.open({
+                        title:"上传生活中的小段子",
+                        type: 1,
+                        scrollbar: false,
+                        area:['400px', '315px'],
+                        content: $('#myModal'),
+                        btn: ['上传', '取消'],
+                        yes: function(index, layero){
+                            debugger;
+                            var content = $("#content").val();
+                            var submitTime = getDateStr(new Date());
+                            var to = dappAddress;
+                            var value = "0";
+                            var callFunction = "saveJoke";
+                            var callArgs = [];
+                            callArgs.push(content);
+                            callArgs.push(submitTime);
+                            nebPay.call(to, value, callFunction, JSON.stringify(callArgs), { //使用nebpay的call接口去调用合约,
+                                listener: cbPush1
+                            });
+                            layer.close(index);
+                        },btn2: function(index, layero){
+                            layer.close(index);
+                        },cancel: function(){
+                            layer.close();
+                        }
+                    });
+                    $('#myModal').removeClass("hide");
+                });
+
+                function cbPush1(resp) {
+                    $("#content").val('');
+                    setTimeout(function() {
+                        getAll();
+                    }, 20000);
+                }
+
+                //点赞
+                function good(isGood,id) {
+                    if(isGood == '1'){
+                        layer.msg("点赞段子不用再次点赞!");
+					} else {
+                        var to = dappAddress;
+                        var value = "0";
+                        var callFunction = "good";
+                        var callArgs = [];
+                        callArgs.push(id);
+                        nebPay.call(to, value, callFunction, JSON.stringify(callArgs), { //使用nebpay的call接口去调用合约,
+                            listener: cbPush2
+                        });
+					}
+
+                }
+
+                function cbPush2(resp) {
+                    setTimeout(function() {
+                        getAll();
+                    }, 20000);
+                }
+
+				function getDateStr(date) {
+					var year = date.getFullYear();
+					var month = date.getMonth() + 1;
+					var strDate = date.getDate();
+					if (month >= 1 && month <= 9) {
+						month = "0" + month
+					}
+					if (strDate >= 0 && strDate <= 9) {
+						strDate = "0" + strDate
+					}
+					var currentdate = year + "-" + month + "-" + strDate;
+					return currentdate;
+                }
+
+			</script>
+		</body>
+
+</html>
