@@ -162,7 +162,7 @@
 				callArgs.push("run" + "_" + new Date().getTime());
 				callArgs.push($("#run").val());
 				nebPay.call(to, value, callFunction, JSON.stringify(callArgs), { //使用nebpay的call接口去调用合约,
-					listener: function (resp) { layer.alert("提交成功"); getline(7); }
+					listener: function (resp) {getline(7); }
 				});
 				//score.arrayMap[callArgs[0]]=callArgs[1];
 			};
